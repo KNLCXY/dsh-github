@@ -40,8 +40,8 @@ const ctx = {
 
 mod.apply(ctx, {})
 const names = tools.map((t) => t.name).sort()
-check('注册 5 个工具', names.length === 5, JSON.stringify(names))
-check('工具名齐全', ['github_api', 'github_fix_git_auth', 'github_push_files', 'github_repo_create', 'github_status'].every((n) => names.includes(n)), JSON.stringify(names))
+check('注册 6 个工具', names.length === 6, JSON.stringify(names))
+check('工具名齐全', ['github_api', 'github_fix_git_auth', 'github_push_files', 'github_release_create', 'github_repo_create', 'github_status'].every((n) => names.includes(n)), JSON.stringify(names))
 check('注册两条路由', routes.length === 2 && routes.some((r) => r.path === '/_dsh-github/settings') && routes.some((r) => r.path === '/_dsh-github/git-auth'), JSON.stringify(routes.map((r) => r.path)))
 check('每个工具都有 render', tools.every((t) => t.output && typeof t.output.render === 'function'))
 

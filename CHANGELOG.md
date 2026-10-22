@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0
+
+新增 `github_release_create`：一条命令替代「建 tag → 建 release → 传附件 → 校验」。
+
+- `tag` 不存在时按 `target`（默认仓库默认分支）自动建
+- `assets` 收本地文件路径（逗号分隔或 JSON 数组），按扩展名选 content-type
+  （`.tgz/.gz` → gzip、`.zip` → zip，其余 octet-stream），逐个传到 uploads.github.com
+- `draft: true` 先存草稿不公开
+- 附件上传复用同一套 token 与代理隧道（有 `proxyUrl` 就走 CONNECT）
+
 ## 0.2.1
 
 - 修 `github_fix_git_auth` 在 DSH 里报「git 不可用」：宿主进程不继承 shell 的 PATH，
