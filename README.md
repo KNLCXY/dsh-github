@@ -161,6 +161,10 @@ github_push_files({
 
 ## scripts/：三个可复用的旁路工具
 
+> 这三个脚本也单独发了一个仓库（不装插件也能用，仓库里同样不含任何 key）：
+> **[KNLCXY/dsh-github-scripts](https://github.com/KNLCXY/dsh-github-scripts)**
+
+
 主流程用 token 走 API，这三个脚本是**没有 token 时**的旁路（也是本插件诞生的原因）：
 
 | 脚本 | 干什么 |
