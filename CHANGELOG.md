@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- 错误信息带上 GitHub 的 `errors[].message`。以前建重名仓库只回
+  `Repository creation failed.`，现在是 `Repository creation failed.（name already exists on this account）`
+
 ## 0.1.0
 
 首个版本。
