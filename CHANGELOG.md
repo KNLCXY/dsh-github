@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+新增 `linkWebsift` 联动开关（`off` / `auto` / `on`）：
+
+- `auto`（默认）：**先探测** websift 是否装着 —— 没装就静默跳过，行为与单装完全一致；
+  装了且自己 `proxyUrl` 为空时，借用它的代理
+- 探测只读 websift 的 `settings.json`，不调用它的工具、不启动它的内核
+- 对方 `proxyMode: never` 时不借
+- 面板显示：是否检测到、实际用的代理、来源（自己 / websift）
+- 实测四档：off+空 → 不用代理；auto+空 → 借 websift；auto+自己配 → 用自己的；on+自己配 → 优先 websift
+
 ## 0.3.1
 
 - 三个旁路脚本不再硬编码内核路径：新增 `lib/detect-chrome.mjs`（多根目录扫描 +
