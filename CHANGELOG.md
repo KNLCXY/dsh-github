@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- 三个旁路脚本不再硬编码内核路径：新增 `lib/detect-chrome.mjs`（多根目录扫描 +
+  Chromium 特征校验 + 偏好排序），脚本改为 `DSH_CHROME` → 自动探测
+- 与独立仓库 [dsh-github-scripts](https://github.com/KNLCXY/dsh-github-scripts) 保持一致
+
 ## 0.3.0
 
 新增 `github_release_create`：一条命令替代「建 tag → 建 release → 传附件 → 校验」。
