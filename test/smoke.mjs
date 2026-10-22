@@ -40,9 +40,9 @@ const ctx = {
 
 mod.apply(ctx, {})
 const names = tools.map((t) => t.name).sort()
-check('注册 4 个工具', names.length === 4, JSON.stringify(names))
-check('工具名齐全', ['github_api', 'github_push_files', 'github_repo_create', 'github_status'].every((n) => names.includes(n)), JSON.stringify(names))
-check('注册设置路由', routes.length === 1 && routes[0].path === '/_dsh-github/settings')
+check('注册 5 个工具', names.length === 5, JSON.stringify(names))
+check('工具名齐全', ['github_api', 'github_fix_git_auth', 'github_push_files', 'github_repo_create', 'github_status'].every((n) => names.includes(n)), JSON.stringify(names))
+check('注册两条路由', routes.length === 2 && routes.some((r) => r.path === '/_dsh-github/settings') && routes.some((r) => r.path === '/_dsh-github/git-auth'), JSON.stringify(routes.map((r) => r.path)))
 check('每个工具都有 render', tools.every((t) => t.output && typeof t.output.render === 'function'))
 
 // ---- 假 req/res
@@ -62,7 +62,8 @@ function fakeReq (method, payload) {
   stream.url = '/_dsh-github/settings'
   return stream
 }
-const handler = routes[0].handler
+const handler = routes.find((r) => r.path === '/_dsh-github/settings').handler
+const gitHandler = routes.find((r) => r.path === '/_dsh-github/git-auth').handler
 
 // 1) 初始：没有 token，且有示例占位符（不是默认值）
 let res = fakeRes()
@@ -112,6 +113,18 @@ check('没 token 时返回提示', typeof out.text === 'string' && out.text.incl
 const push = tools.find((t) => t.name === 'github_push_files')
 const bad = await push.execute({ repo: 'no-slash', message: 'x', files: '[]' })
 check('repo 格式校验', /owner\/name/.test(bad.text), bad.text)
+
+// 9) git 凭据路由：GET 应该读得到 helper / store（只读，不写配置）
+res = fakeRes()
+await gitHandler(fakeReq('GET'), res)
+check('git-auth GET 200', res.status === 200, res.body)
+check('git-auth 返回 helpers 数组', Array.isArray(res.json().status.helpers), JSON.stringify(res.json().status || {}))
+check('git-auth 返回 needFix 布尔', typeof res.json().status.needFix === 'boolean')
+
+// 10) github_fix_git_auth 默认只检查、不写配置
+const fix = tools.find((t) => t.name === 'github_fix_git_auth')
+const report = await fix.execute({})
+check('默认不 apply 时只报告', typeof report.text === 'string' && /git：|helper（system \+ global）/.test(report.text), report.text)
 
 console.log(failed === 0 ? '\n全部通过 ✔' : `\n${failed} 项失败 ✘`)
 process.exit(failed === 0 ? 0 : 1)

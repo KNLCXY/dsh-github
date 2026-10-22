@@ -1,6 +1,6 @@
 {
   "name": "dsh-github",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "GitHub tools for DeepSeek Harness: call the REST API, commit many files in one commit, create repos, and check who the token belongs to. The token lives in the plugin's own settings — never in the repo, never in a tool result.",
   "type": "module",
   "main": "lib/index.js",
@@ -49,8 +49,12 @@
     "@deepseek-ai/dsh-tools": "^0.1.5-rc.2 || ^0.2.0-rc.1"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/cordis": { "optional": true },
-    "@deepseek-ai/dsh-tools": { "optional": true }
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
   },
   "dsh": {
     "bundle": {

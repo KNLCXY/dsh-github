@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0
+
+新增 `github_fix_git_auth`：修「git 老是弹 CredentialHelperSelector（选哪个凭据助手）」。
+
+- 成因：git 的 **system** 配置里 `credential.helper = helper-selector`（这个 helper 的职责就是弹选择框），
+  且 `credential.credentialStore` 没配 —— GCM 不知道往哪存，于是每次都问
+- 注意：`credential.helper` 是**多层叠加**的，global 写 `manager` 不会顶掉 system 的
+  `helper-selector`；必须先写一条空值重置列表，再写 `manager`
+- 默认只检查；`apply: true` 才会写 `~/.gitconfig`（store 按平台取 wincred / osxkeychain / secretservice）
+- 设置面板里也有「修复（写 ~/.gitconfig）」按钮，走 `/_dsh-github/git-auth`
+
 ## 0.1.1
 
 - 错误信息带上 GitHub 的 `errors[].message`。以前建重名仓库只回

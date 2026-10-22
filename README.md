@@ -191,6 +191,7 @@ ELECTRON_RUN_AS_NODE=1 "<DSH 目录>/DeepSeek Harness.exe" scripts/chrome-probe.
 | `404 Not Found` | 仓库名拼错，或 token 没有这个仓库的访问权（fine-grained 要显式选仓库） |
 | 请求超时 / `fetch failed` | 这个网络到 GitHub 不稳，在设置里填代理（`http://127.0.0.1:7897`），或用 `github_status` 对比直连与代理 |
 | 设置页没有「GitHub」 | client 半在进程启动时组装：**重启 DSH** |
+| 反复弹 `CredentialHelperSelector` | git 的 system 配置把 `credential.helper` 设成了 `helper-selector`。用 `github_fix_git_auth({ apply: true })`，或在「设置 → GitHub」点「修复」——只改 git 凭据存储，不碰 token |
 
 ## 开发
 
@@ -207,6 +208,37 @@ ELECTRON_RUN_AS_NODE=1 "<DSH>/DeepSeek Harness.exe" test/smoke.mjs
 （pnpm 是把包**复制**进 `node_modules`，版本号不变会说 "Already up to date"。）
 
 实现要点见 [lib/index.js](lib/index.js) 顶部注释：代理是自实现的 CONNECT 隧道（Node 的 `fetch` 不读代理环境变量），所以 `proxyUrl` 一填，连 `api.github.com` 也能走隧道。
+
+
+## git 凭据弹窗（CredentialHelperSelector）
+
+Windows 上如果每次 git 要凭据都弹一个「Select a credential helper」的框，成因是：
+
+```bash
+git config --system --get-all credential.helper   # → helper-selector
+git config --global --get credential.credentialStore  # → 空
+```
+
+`helper-selector` 这个 helper 的职责就是弹选择框；store 没配，它每次都问。
+
+**修法**（注意 helper 是多层叠加的，只写 global `manager` 顶不掉 system 的那条）：
+
+```bash
+git config --global credential.credentialStore wincred
+git config --global --unset-all credential.helper
+git config --global --add credential.helper ""       # 空值 = 重置此前累积的列表
+git config --global --add credential.helper manager
+```
+
+插件里做成了一条命令：
+
+```js
+github_fix_git_auth({})              // 只检查
+github_fix_git_auth({ apply: true }) // 写入 ~/.gitconfig
+```
+
+或在「设置 → GitHub」点 **修复（写 ~/.gitconfig）**。只影响 git 的凭据存储位置，
+不读取、不修改你的 GitHub token。
 
 ## 许可
 
