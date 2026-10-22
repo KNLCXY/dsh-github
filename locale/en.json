@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "GitHub",
+    "description": "GitHub tools for DSH: REST API calls, multi-file commits in one commit, repo creation, token identity check. The token lives in the plugin's own settings (the field only shows an example placeholder, never a default), never in the repo and never in tool output."
+  }
+}

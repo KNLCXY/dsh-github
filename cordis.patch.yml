@@ -1,0 +1,16 @@
+# dsh-github bundle patch — 把本插件插进 profile 的组合里。
+#
+# 注意：这里**不写 token**。token 只存在于
+# ~/.dsh/storages/dsh-github/settings.json（由「设置 → GitHub」写入），
+# 优先级高于这里的 config，也不会进任何仓库。
+- insert:
+    - id: dsh-github
+      name: dsh-github
+      config:
+        # 刻意留空：没填就是没配，工具会提示你去设置页填
+        token: ''
+        apiBase: 'https://api.github.com'
+        # 留空 = 直连；GitHub 直连超时的网络填本机代理，例如 http://127.0.0.1:7897
+        proxyUrl: ''
+        timeoutMs: 20000
+        maxChars: 6000

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "GitHub",
+    "description": "GitHub 工具：调 REST API、一次提交多个文件、建仓库、查 token 身份。token 只存在插件自己的设置里（设置里那格只有示例，没有默认值），不进仓库、不进工具输出。"
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.tgz
+*.log
+.DS_Store
+Thumbs.db
+# 本地凭据永远不进仓库
+settings.json
+.env

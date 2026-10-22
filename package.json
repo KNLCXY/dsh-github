@@ -1,0 +1,66 @@
+{
+  "name": "dsh-github",
+  "version": "0.1.0",
+  "description": "GitHub tools for DeepSeek Harness: call the REST API, commit many files in one commit, create repos, and check who the token belongs to. The token lives in the plugin's own settings — never in the repo, never in a tool result.",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "./docs/icon.png",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "dsh-plugin.json",
+    "locale",
+    "docs",
+    "scripts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "license": "MIT",
+  "author": "KNLCXY",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KNLCXY/dsh-github.git"
+  },
+  "homepage": "https://github.com/KNLCXY/dsh-github#readme",
+  "bugs": {
+    "url": "https://github.com/KNLCXY/dsh-github/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "github",
+    "github-api",
+    "git",
+    "agent-tools",
+    "personal-access-token"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/dsh-tools": "^0.1.5-rc.2 || ^0.2.0-rc.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": { "optional": true },
+    "@deepseek-ai/dsh-tools": { "optional": true }
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [],
+      "external": []
+    }
+  }
+}
