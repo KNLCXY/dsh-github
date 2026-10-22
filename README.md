@@ -12,6 +12,21 @@ github_repo_create   建仓库，顺手设 topics
 ```
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![release](https://img.shields.io/github/v/release/KNLCXY/dsh-github?label=release)](https://github.com/KNLCXY/dsh-github/releases/latest)
+
+---
+
+## 下载
+
+不想 clone 就直接拿打包好的安装包：
+
+**[⬇ dsh-github-0.1.1.tgz](https://github.com/KNLCXY/dsh-github/releases/latest/download/dsh-github-0.1.1.tgz)**
+
+```bash
+dsh plugin --profile <你的 profile> add "file:<下载路径>/dsh-github-0.1.1.tgz"
+```
+
+校验：同页附件 `SHA256SUMS.txt`（`sha256sum -c SHA256SUMS.txt`）。
 
 ---
 
