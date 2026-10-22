@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- 修 `github_fix_git_auth` 在 DSH 里报「git 不可用」：宿主进程不继承 shell 的 PATH，
+  改为按 `DSH_GIT` → PATH → dsh-ops 自带 ucrt64/mingw64 → 常见安装位置 逐个探测并缓存
+- 找不到 git 时不再假装「配置就绪」，直接说明并给修法
+
 ## 0.2.0
 
 新增 `github_fix_git_auth`：修「git 老是弹 CredentialHelperSelector（选哪个凭据助手）」。

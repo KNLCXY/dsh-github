@@ -1,6 +1,6 @@
 {
   "name": "dsh-github",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "GitHub tools for DeepSeek Harness: call the REST API, commit many files in one commit, create repos, and check who the token belongs to. The token lives in the plugin's own settings — never in the repo, never in a tool result.",
   "type": "module",
   "main": "lib/index.js",
