@@ -9,21 +9,25 @@ github_status        这个 token 是谁的、有什么权限、还剩多少配�
 github_api           直接调 REST API（相对路径或完整 URL）
 github_push_files    一批文件 = 一个 commit（blob → tree → commit → 更新 ref）
 github_repo_create   建仓库，顺手设 topics
+github_release_create 建 Release 并上传附件（tgz 等），可标 draft / prerelease
+github_fix_git_auth  诊断并修 git 凭据弹窗（CredentialHelperSelector）
 ```
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![release](https://img.shields.io/github/v/release/KNLCXY/dsh-github?label=release)](https://github.com/KNLCXY/dsh-github/releases/latest)
+[![release](https://img.shields.io/github/v/release/KNLCXY/dsh-github?label=release&include_prereleases)](https://github.com/KNLCXY/dsh-github/releases)
 
 ---
 
 ## 下载
 
-不想 clone 就直接拿打包好的安装包：
+不想 clone 就直接去 Release 页拿安装包（每个版本都带 `.tgz` 和 `SHA256SUMS.txt`）：
 
-**[⬇ dsh-github-0.1.1.tgz](https://github.com/KNLCXY/dsh-github/releases/latest/download/dsh-github-0.1.1.tgz)**
+**[→ 全部 Release](https://github.com/KNLCXY/dsh-github/releases)**
+
+> 版本口径：**0.x 一律是预发布**（Pre-release，不算 Latest）；**1.x 起才算正式版**。
 
 ```bash
-dsh plugin --profile <你的 profile> add "file:<下载路径>/dsh-github-0.1.1.tgz"
+dsh plugin --profile <你的 profile> add "file:<下载路径>/dsh-github-<版本>.tgz"
 ```
 
 校验：同页附件 `SHA256SUMS.txt`（`sha256sum -c SHA256SUMS.txt`）。
