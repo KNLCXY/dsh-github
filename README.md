@@ -147,22 +147,6 @@ github_push_files({
 | `topics` | 逗号分隔，例如 `"dsh,dsh-plugin,deepseek-harness"` —— **决定能不能被搜到** |
 | `owner` | 组织名；不填就是自己的账号 |
 
-## 与 dsh-websift 的联动（可选）
-
-dsh-github **单独可用**；联动只是让它借用 websift 的代理配置，省得设置两遍。
-
-设置项 `linkWebsift` 三档：
-
-| 值 | 行为 |
-|---|---|
-| `off` | 完全不看 websift，用自己设置里的 `proxyUrl` |
-| **`auto`（默认）** | 先探测 websift 是否装着：没装 → **静默跳过**（行为与单装完全一致）；装了 → 只有自己 `proxyUrl` 为空时才借用 |
-| `on` | 优先用 websift 的代理（便于统一管理） |
-
-- 探测只读 `~/.dsh/storages/browser-kernel/settings.json`，**不调它的工具、不启动它的内核**
-- 对方 `proxyMode: never`（一律直连）时不借
-- 面板里会显示：是否检测到 websift、实际用的是哪个代理、来源是自己还是 websift
-
 ## 安全边界
 
 | 事项 | 做法 |
